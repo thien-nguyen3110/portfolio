@@ -98,6 +98,93 @@
             box-shadow: 0 0 30px -10px rgba(255, 255, 255, 0.1);
             transform: translateY(-2px);
         }
+        /* Flip card styles for Work History */
+        .flip-card {
+            perspective: 1000px;
+        }
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+        }
+        .flip-card:hover .flip-card-inner,
+        .flip-card:focus-within .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        .flip-card.is-flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        .flip-card-front,
+        .flip-card-back {
+            position: relative;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            transform-style: preserve-3d;
+        }
+        .flip-card-front {
+            z-index: 2;
+        }
+        .flip-card-back {
+            position: absolute;
+            inset: 0;
+            transform: rotateY(180deg);
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .flip-card-inner { transition: none; }
+        }
+        /* Logo tile to mask background and enlarge logos */
+        .work-logo {
+            width: 72px;
+            height: 72px;
+            padding: 8px;
+            background: #ffffff;
+            border-radius: 12px;
+            object-fit: contain;
+            display: block;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+        }
+        .tech-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 8px;
+            background: rgba(255,255,255,0.04);
+            color: #e6eef8;
+            border-radius: 999px;
+            font-size: 12px;
+            border: 1px solid rgba(255,255,255,0.04);
+        }
+        /* Fix flex overflow and ensure cards fit inside container */
+        .flip-card { display: block; width: 100%; }
+        .flip-card-inner { width: 100%; box-sizing: border-box; }
+        .flip-card-front, .flip-card-back { width: 100%; box-sizing: border-box; overflow: hidden; }
+        /* allow the flex child to shrink and wrap properly */
+        .flip-card-front .flex-1, .flip-card-front .flex-1 * { min-width: 0; }
+        .flip-card-front .flex { align-items: center; }
+        .work-logo { flex-shrink: 0; }
+        /* make tech badges wrap and scale on small screens */
+        .tech-badge { white-space: nowrap; }
+        @media (max-width: 640px) {
+            .work-logo { width: 64px; height: 64px; padding: 6px; }
+            .flip-card-front .flex { gap: 12px; }
+        }
+        /* Make the back content area larger and scrollable when needed */
+        .flip-card-back {
+            max-height: 260px;
+            overflow-y: auto;
+            padding-right: 12px; /* give room for scrollbar */
+        }
+        /* Custom thin scrollbar (WebKit) */
+        .flip-card-back::-webkit-scrollbar { width: 8px; }
+        .flip-card-back::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.06); border-radius: 8px; }
+        .flip-card-back::-webkit-scrollbar-track { background: transparent; }
+        @media (min-width: 768px) {
+            .flip-card-back { max-height: 320px; }
+        }
+        @media (min-width: 768px) {
+            .work-logo { width: 96px; height: 96px; padding: 10px; }
+        }
     </style>
 </head>
 <body class="antialiased selection:bg-cyan-500 selection:text-black overflow-x-hidden">
@@ -277,41 +364,120 @@
         <h2 class="text-sm font-bold uppercase tracking-widest mb-8 text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-yellow-400 to-cyan-400">Work History</h2>
         
         <div class="border-l border-zinc-800 pl-8 space-y-12 relative">
-            
+            <!-- Card 1: CityBite -->
             <div class="relative">
-                <div class="absolute -left-[37px] top-1 h-4 w-4 rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 border-4 border-black"></div>
-                <div class="flex flex-col md:flex-row md:items-baseline gap-2 mb-2">
-                    <h3 class="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-blue-400">CityBite</h3>
-                    <span class="text-sm text-cyan-400">Software Development Intern</span>
+                <div class="absolute -left-[37px] top-6 h-4 w-4 rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 border-4 border-black"></div>
+                <div class="flip-card">
+                    <div class="flip-card-inner bg-transparent">
+                        <div class="flip-card-front p-6 bg-surface border border-zinc-800 rounded-2xl card-glow">
+                            <div class="flex items-center gap-4">
+                                <img src="logos/stock-vector-city-bites-culinary-concept-logo-1435872950.jpg" alt="CityBite logo" class="work-logo">
+                                <div class="flex-1">
+                                    <h3 class="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-blue-400">CityBite</h3>
+                                    <p class="text-sm text-cyan-400">Software Development Intern</p>
+                                    <p class="text-xs font-mono text-cyan-300/60 mt-1">Sep 2025 - Dec 2025 • Ho Chi Minh City</p>
+                                    <div class="mt-3 flex flex-wrap gap-2">
+                                        <span class="tech-badge"><i class="devicon-googlecloud-plain text-sm mr-1"></i> GCP</span>
+                                        <span class="tech-badge"><i class="devicon-vuejs-plain text-sm mr-1"></i> Vue.js</span>
+                                        <span class="tech-badge"><i class="devicon-nodejs-plain text-sm mr-1"></i> Node.js</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flip-card-back p-6 bg-gradient-to-br from-cyan-900/10 to-blue-900/10 border border-cyan-500/10 rounded-2xl">
+                            <h4 class="text-sm font-semibold text-white mb-2">What I did</h4>
+                            <ul class="list-disc pl-5 text-zinc-300 mb-3">
+                                <li>Built and scaled backend services on GCP handling 1,000+ users.</li>
+                                <li>Reduced p95 API latency by <span class="text-cyan-300 font-semibold">35%</span> via autoscaling and query optimization.</li>
+                                <li>Improved Lighthouse LCP by 40% using caching strategies in Vue.js and CDN tuning.</li>
+                            </ul>
+                            <h4 class="text-sm font-semibold text-white mb-2">Tech</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="tech-badge">GCP</span>
+                                <span class="tech-badge">Vue.js</span>
+                                <span class="tech-badge">Node.js</span>
+                                <span class="tech-badge">Docker</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <p class="text-xs font-mono text-cyan-300/60 mb-4">Sep 2025 - Dec 2025 • Ho Chi Minh City</p>
-                <p class="text-zinc-300 max-w-2xl">
-                    Engineered food discovery platform on GCP. Reduced p95 latency by <span class="text-cyan-300 font-semibold">35%</span> and handled 1,000+ users. Optimized Lighthouse LCP by 40% using Vue.js caching strategies.
-                </p>
             </div>
 
+            <!-- Card 2: FPT Corporation -->
             <div class="relative">
-                <div class="absolute -left-[37px] top-1 h-4 w-4 rounded-full bg-gradient-to-r from-purple-400 to-pink-500 border-4 border-black"></div>
-                <div class="flex flex-col md:flex-row md:items-baseline gap-2 mb-2">
-                    <h3 class="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-pink-400">FPT Corporation</h3>
-                    <span class="text-sm text-purple-400">Software Engineer Intern</span>
+                <div class="absolute -left-[37px] top-6 h-4 w-4 rounded-full bg-gradient-to-r from-purple-400 to-pink-500 border-4 border-black"></div>
+                <div class="flip-card">
+                    <div class="flip-card-inner bg-transparent">
+                        <div class="flip-card-front p-6 bg-surface border border-zinc-800 rounded-2xl card-glow">
+                            <div class="flex items-center gap-4">
+                                <img src="logos/images.png" alt="FPT Corporation logo" class="work-logo">
+                                <div class="flex-1">
+                                    <h3 class="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-pink-400">FPT Corporation</h3>
+                                    <p class="text-sm text-purple-400">Software Engineer Intern</p>
+                                    <p class="text-xs font-mono text-purple-300/60 mt-1">May 2025 - Aug 2025 • Da Nang</p>
+                                    <div class="mt-3 flex flex-wrap gap-2">
+                                        <span class="tech-badge"><i class="devicon-java-plain text-sm mr-1"></i> Java</span>
+                                        <span class="tech-badge"><i class="devicon-gitlab-plain text-sm mr-1"></i> GitLab CI</span>
+                                        <span class="tech-badge">Stripe</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flip-card-back p-6 bg-gradient-to-br from-purple-900/10 to-pink-900/10 border border-purple-500/10 rounded-2xl">
+                            <h4 class="text-sm font-semibold text-white mb-2">What I did</h4>
+                            <ul class="list-disc pl-5 text-zinc-300 mb-3">
+                                <li>Implemented robust checkout flows capable of handling <span class="text-purple-300 font-semibold">6,000 daily requests</span>.</li>
+                                <li>Integrated Stripe Webhooks for reliable payment processing and reconciliation.</li>
+                                <li>Maintained CI pipelines with GitLab to ensure 80% test coverage and quick deployments.</li>
+                            </ul>
+                            <h4 class="text-sm font-semibold text-white mb-2">Tech</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="tech-badge">Java</span>
+                                <span class="tech-badge">MySQL</span>
+                                <span class="tech-badge">Stripe</span>
+                                <span class="tech-badge">GitLab CI</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <p class="text-xs font-mono text-purple-300/60 mb-4">May 2025 - Aug 2025 • Da Nang</p>
-                <p class="text-zinc-300 max-w-2xl">
-                    Built e-commerce checkout flows handling <span class="text-purple-300 font-semibold">6,000 daily requests</span>. Integrated Stripe Webhooks and maintained 80% test coverage with GitLab CI/CD.
-                </p>
             </div>
 
+            <!-- Card 3: Iowa State University -->
             <div class="relative">
-                <div class="absolute -left-[37px] top-1 h-4 w-4 rounded-full bg-gradient-to-r from-orange-400 to-yellow-500 border-4 border-black"></div>
-                <div class="flex flex-col md:flex-row md:items-baseline gap-2 mb-2">
-                    <h3 class="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-300 to-yellow-400">Iowa State University</h3>
-                    <span class="text-sm text-orange-400">Teaching Assistant (DSA)</span>
+                <div class="absolute -left-[37px] top-6 h-4 w-4 rounded-full bg-gradient-to-r from-orange-400 to-yellow-500 border-4 border-black"></div>
+                <div class="flip-card">
+                    <div class="flip-card-inner bg-transparent">
+                        <div class="flip-card-front p-6 bg-surface border border-zinc-800 rounded-2xl card-glow">
+                            <div class="flex items-center gap-4">
+                                <img src="logos/Iowa_State_University_seal.svg.png" alt="Iowa State University logo" class="work-logo">
+                                <div class="flex-1">
+                                    <h3 class="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-300 to-yellow-400">Iowa State University</h3>
+                                    <p class="text-sm text-orange-400">Teaching Assistant (DSA)</p>
+                                    <p class="text-xs font-mono text-orange-300/60 mt-1">Jan 2024 - Dec 2024</p>
+                                    <div class="mt-3 flex flex-wrap gap-2">
+                                        <span class="tech-badge"><i class="devicon-java-plain text-sm mr-1"></i> Java</span>
+                                        <span class="tech-badge"><i class="devicon-python-plain text-sm mr-1"></i> Python</span>
+                                        <span class="tech-badge"><i class="devicon-docker-plain text-sm mr-1"></i> Docker</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flip-card-back p-6 bg-gradient-to-br from-orange-900/10 to-yellow-900/10 border border-orange-500/10 rounded-2xl">
+                            <h4 class="text-sm font-semibold text-white mb-2">What I did</h4>
+                            <ul class="list-disc pl-5 text-zinc-300 mb-3">
+                                <li>Mentored 30+ students weekly in Data Structures & Algorithms using Java and Python.</li>
+                                <li>Automated grading workflows to reduce turnaround time by 40%.</li>
+                                <li>Prepared lab assignments and led review sessions to improve student outcomes.</li>
+                            </ul>
+                            <h4 class="text-sm font-semibold text-white mb-2">Tech</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="tech-badge">Java</span>
+                                <span class="tech-badge">Python</span>
+                                <span class="tech-badge">Docker</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <p class="text-xs font-mono text-orange-300/60 mb-4">Jan 2024 - Dec 2024</p>
-                <p class="text-zinc-300 max-w-2xl">
-                    Mentored 30+ students/week in Data Structures & Algorithms (Java/Python). Automating grading to reduce turnaround time by 40%.
-                </p>
             </div>
 
         </div>
@@ -323,6 +489,18 @@
 
     <script>
         lucide.createIcons();
+    </script>
+    <script>
+        // Enable touch/click flip for mobile: toggle 'is-flipped' on card tap
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.flip-card').forEach(function (card) {
+                card.addEventListener('click', function (e) {
+                    // avoid interfering with links inside the card
+                    if (e.target.closest('a')) return;
+                    card.classList.toggle('is-flipped');
+                });
+            });
+        });
     </script>
 </body>
 </html>
