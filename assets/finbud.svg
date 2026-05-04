@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Finbud AI">
+  <defs>
+    <linearGradient id="g" x1="10" y1="12" x2="118" y2="116" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#5ee7ff"/>
+      <stop offset=".52" stop-color="#b889ff"/>
+      <stop offset="1" stop-color="#ff6ea8"/>
+    </linearGradient>
+  </defs>
+  <rect width="128" height="128" rx="32" fill="#05070c"/>
+  <path d="M28 82V28h42c16 0 27 10 27 24 0 15-11 24-27 24H45v6H28Zm17-21h24c7 0 11-3 11-9s-4-9-11-9H45v18Z" fill="url(#g)"/>
+  <path d="M51 101 74 69h20l-23 32H51Z" fill="#ffd166"/>
+</svg>
