@@ -959,13 +959,10 @@ function startClock() {
 /* ------------------------------------------------------------
    8.  BOOTSTRAP  (runs after all declarations)
    ------------------------------------------------------------ */
-const prefersReduced =
-  window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const forceIntro = /(?:\?|&)intro\b/.test(location.search); // override (replay the 3D intro)
 const skipIntro =
   !forceIntro &&
-  (prefersReduced ||
-    location.hash === "#os" ||
+  (location.hash === "#os" ||
     location.hash === "#desktop" ||
     /(?:\?|&)(os|skipintro)\b/.test(location.search));
 
