@@ -1,48 +1,120 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- UTF-8 Support -->
     <meta charset="UTF-8" />
-    <!-- IE Compatibility -->
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <!-- Viewport -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Theme Color -->
-    <meta name="theme-color" content="#010103" />
-    <!-- Description -->
+    <meta name="theme-color" content="#008080" />
     <meta
       name="description"
-      content="Thien Tam Nguyen's animated React and Three.js portfolio for full-stack, cloud, and data systems work."
+      content="Stephen (Thien Tam) Nguyen — Software Engineer. A retro 3D Three.js + Windows-98 OS portfolio showcasing embedded, full-stack, and cloud engineering work."
     />
-    <!-- Author -->
-    <meta name="author" content="Thien Tam Nguyen" />
-
-    <!-- Keywords -->
+    <meta name="author" content="Stephen Nguyen" />
     <meta
       name="keywords"
-      content="Thien Tam Nguyen, portfolio, software engineer, data scientist, react, threejs, cloud, AWS, GCP, Node.js, Spring Boot, Next.js"
+      content="Stephen Nguyen, Thien Tam Nguyen, portfolio, software engineer, embedded, C, C++, Java, Spring Boot, AWS, Kubernetes, Three.js, Iowa State"
     />
 
-    <!-- Icon -->
     <link rel="icon" type="image/ico" href="favicon.ico" sizes="48x48" />
     <link rel="icon" type="image/png" href="favicon1.png" sizes="16x16" />
     <link rel="icon" type="image/png" href="favicon2.png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="apple-icon.png" type="image/png" sizes="180x180" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      rel="apple-touch-icon"
-      href="apple-icon.png"
-      type="image/png"
-      sizes="180x180"
+      href="https://fonts.googleapis.com/css2?family=VT323&family=Roboto+Slab:wght@500;700;900&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
     />
 
-    <!-- Title -->
-    <title>Thien Tam Nguyen | Three.js Portfolio</title>
-    <script type="module" crossorigin src="./assets/index-BDz9eLhn.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-kr-A7WMK.css">
+    <link rel="stylesheet" href="./style.css" />
+
+    <title>Stephen Nguyen — StephenOS '26</title>
+
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+        }
+      }
+    </script>
   </head>
+
   <body>
-    <div id="root"></div>
+    <!-- ===== 3D POWER-ON SCENE ===== -->
+    <div id="scene-stage">
+      <canvas id="three-canvas"></canvas>
 
-    <noscript>Enable JavaScript to run this Vite.js application.</noscript>
+      <!-- Loading -->
+      <div id="loader" class="scene-overlay">
+        <div class="loader-box">
+          <div class="loader-logo">STEPHEN&nbsp;OS</div>
+          <div class="loader-bar"><span id="loader-fill"></span></div>
+          <div class="loader-pct" id="loader-pct">LOADING ASSETS&hellip; 0%</div>
+        </div>
+      </div>
 
+      <!-- Power on prompt -->
+      <div id="power-prompt" class="scene-overlay hidden">
+        <div class="power-inner">
+          <div class="power-sub">A PERSONAL COMPUTER, EST. 2027 &mdash; ASSEMBLED IN AMES, IA</div>
+          <h1 class="power-title">STEPHEN&nbsp;NGUYEN</h1>
+          <div class="power-tag">Software&nbsp;Engineer&nbsp;&middot;&nbsp;Embedded&nbsp;&amp;&nbsp;Full&#8209;Stack</div>
+          <button id="power-btn" class="power-btn">&#9654;&nbsp;&nbsp;POWER&nbsp;ON</button>
+          <div class="power-hint">click the monitor to boot</div>
+        </div>
+      </div>
+
+      <!-- white/teal flash used during fly-in -->
+      <div id="warp-flash"></div>
+    </div>
+
+    <!-- ===== BOOT SEQUENCE (CRT) ===== -->
+    <div id="boot-screen" class="hidden">
+      <div id="boot-log"></div>
+    </div>
+
+    <!-- ===== DESKTOP / OS ===== -->
+    <div id="desktop" class="hidden">
+      <!-- desktop icons injected by JS -->
+      <div id="desktop-icons"></div>
+
+      <!-- window layer -->
+      <div id="window-layer"></div>
+
+      <!-- start menu -->
+      <div id="start-menu" class="hidden"></div>
+
+      <!-- taskbar -->
+      <div id="taskbar">
+        <button id="start-btn">
+          <span class="start-flag">
+            <i></i><i></i><i></i><i></i>
+          </span>
+          Start
+        </button>
+        <div id="task-buttons"></div>
+        <div id="tray">
+          <span id="tray-vol">&#128266;</span>
+          <span id="clock">--:-- --</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- CRT visual effects laid over everything -->
+    <div id="crt-fx" aria-hidden="true">
+      <div class="crt-scanlines"></div>
+      <div class="crt-vignette"></div>
+      <div class="crt-flicker"></div>
+    </div>
+
+    <noscript>
+      <div style="color:#fff;font-family:sans-serif;padding:40px;text-align:center">
+        Please enable JavaScript to boot StephenOS.
+      </div>
+    </noscript>
+
+    <script type="module" src="./main.js"></script>
   </body>
 </html>
